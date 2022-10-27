@@ -1,0 +1,197 @@
+/*
+ * Copyright (c) 2018-2020 Nordic Semiconductor ASA
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/ {
+	model = "SCM-LTEM1NRF/SCO-M5SNRF9160";
+	compatible = "nordic,nrf9160-dk-nrf9160";
+
+	chosen {
+		zephyr,console = &uart0;
+		zephyr,shell-uart = &uart0;
+		zephyr,uart-mcumgr = &uart0;
+	};
+
+	leds {
+		compatible = "gpio-leds";
+		led0: led_0 {
+			gpios = <&gpio0 00 0>;
+			label = "WAKE_OUT";
+		};
+		
+		/* External LED */
+		led1: led_1 {
+			gpios = <&gpio0 31 0>;
+			label = "External LED";
+		};
+		/* OnBoard LED ST-A(L) */
+		led2: led_2 {
+			gpios = <&gpio0 6 0>;
+			label = "Green LED 3";
+		};
+		/* OnBoard LED ST-B(R) */
+		led3: led_3 {
+			gpios = <&gpio0 7 0>;
+			label = "Green LED 4";
+		};
+		/* RC-SW1 (WAKE_IN) */
+		led4: led_4 {
+			gpios = <&gpio0 21 0>;
+			label = "RC-SW1";
+		};
+		/* RC-SW2 (WAKE_OUT) */
+		led5: led_5 {
+			gpios = <&gpio0 20 0>;
+			label = "RC-SW2";
+		};
+		/* RC-SW3 (GPIO_0) */
+		led6: led_6 {
+			gpios = <&gpio0 26 0>;
+			label = "RC-SW3";
+		};
+		/* RC-SW4 (GPIO_1) */
+		led7: led_7 {
+			gpios = <&gpio0 27 0>;
+			label = "RC-SW4";
+		};
+		/* RC-SW5 (UART_RST) */
+		led8: led_8 {
+			gpios = <&gpio0 25 0>;
+			label = "RC-SW5";
+		};
+		/* RC-SW6 (UART_CTS) */
+		led9: led_9 {
+			gpios = <&gpio0 24 0>;
+			label = "RC-SW6";
+		};
+	};
+
+	/* These aliases are provided for compatibility with samples */
+	aliases {
+		led0 = &led0;
+		led1 = &led1;
+		led2 = &led2;
+		led3 = &led3;
+
+		led4 = &led4;
+		led5 = &led5;
+		led6 = &led6;
+		led7 = &led7;
+		led8 = &led8;
+		led9 = &led9;
+	};
+};
+
+&adc {
+	status = "okay";
+};
+
+&gpiote {
+	status = "okay";
+};
+
+&gpio0 {
+	status = "okay";
+};
+
+&uart0 {
+	status = "okay";
+	current-speed = <115200>;
+	tx-pin = <23>;
+	rx-pin = <22>;
+/*	rts-pin = <25>; */
+/*	cts-pin = <24>; */
+};
+
+&i2c2 {
+	compatible = "nordic,nrf-twim";
+	status = "okay";
+	sda-pin = <29>;
+	scl-pin = <30>;
+	clock-frequency = <100000>;
+};
+
+&spi3 {
+	compatible = "nordic,nrf-spis";
+	status = "okay";
+	sck-pin = <3>;
+	mosi-pin = <1>;
+	miso-pin = <2>;
+	csn-pin = <4>;
+	def-char = <0x20>;
+};
+
+&timer0 {
+	status = "okay";
+};
+
+&timer1 {
+	status = "okay";
+};
+
+&timer2 {
+	status = "okay";
+};
+
+&flash0 {
+	/*
+	 * For more information, see:
+	 * http://docs.zephyrproject.org/latest/guides/dts/index.html#flash-partitions
+	 */
+	partitions {
+		compatible = "fixed-partitions";
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+		boot_partition: partition@0 {
+			label = "mcuboot";
+			reg = <0x00000000 0x10000>;
+		};
+		slot0_partition: partition@10000 {
+			label = "image-0";
+		};
+		slot0_ns_partition: partition@40000 {
+			label = "image-0-nonsecure";
+		};
+		slot1_partition: partition@80000 {
+			label = "image-1";
+		};
+		slot1_ns_partition: partition@b0000 {
+			label = "image-1-nonsecure";
+		};
+		scratch_partition: partition@f0000 {
+			label = "image-scratch";
+			reg = <0x000f0000 0xa000>;
+		};
+		storage_partition: partition@fa000 {
+			label = "storage";
+			reg = <0x000fa000 0x00006000>;
+		};
+	};
+};
+
+/ {
+
+	reserved-memory {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges;
+
+		sram0_s: image_s@20000000 {
+			/* Secure image memory */
+		};
+
+		sram0_bsd: image_bsd@20010000 {
+			/* BSD (shared) memory */
+		};
+
+		sram0_ns: image_ns@20020000 {
+			/* Non-Secure image memory */
+		};
+	};
+};
+
+/* Include partition configuration file */
+#include "scm-ltem1nrf_nrf9160_partition_conf.dts"
