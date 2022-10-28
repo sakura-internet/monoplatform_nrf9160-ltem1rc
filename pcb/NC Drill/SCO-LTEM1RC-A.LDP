@@ -1,0 +1,3 @@
+Layer Pairs Export File for PCB: D:\Dropbox\Development\Project\1602_SAKURA\pcb\SCO-LTEM1RC-A\SCO-LTEM1RC-A.PcbDoc
+LayersSetName=Top_Bot_Thru_Holes|DrillFile=sco-ltem1rc-a-roundholes.txt|DrillLayers=gtl,gbl
+LayersSetName=Top_Bot_Slot_Holes|DrillFile=sco-ltem1rc-a-slotholes.txt|DrillLayers=gtl,gbl

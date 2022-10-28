@@ -1,0 +1,989 @@
+[
+    {
+        "id": "dbab9424.ebe0f8",
+        "type": "tab",
+        "label": "グラフ表示と制御",
+        "disabled": false,
+        "info": "本フローはモノプラットフォームのサンプルプログラムです。センサーデータの収集とグラフ表示、赤外線学習リモコンの外部制御を行うことができます。\nnRF9160のサンプルプログラム及びガーバーデータなどは下記のURLで公開しています。\nhttps://github.com/sakura-internet/monoplatform_nrf9160-ltem1rc\n\n■グラフ表示\n\nモノプラットフォームのWebSocket（`wss://ws.sipf.iot.sakura.ad.jp/v0/.....`）サービスから送信されたJSONデータを用いてダッシュボード上にグラフを描画します。\nまた、グラフは`http://<IPアドレス>:<指定したWeb UIポート番号>/ui/`で確認することができます。\n\n以下2点を設定しデプロイすることで動作します。\n\nmonopf_in(WebSocket-inノード)\n    モノプラットフォームサービスアダプタで確認できるWebSocketのURL（`wss://ws.sipf.iot.sakura.ad.jp/v0/.....`）を設定します。\n\n    \n\n■赤外線リモコン操作ボタン\nダッシュボード上のボタンを押下することで、デバイスに制御用のJSONデータを生成し送信します。   \nmonopf_out(WebSocket-outノード)\n    モノプラットフォームサービスアダプタで確認できるWebSocketのURL（`wss://ws.sipf.iot.sakura.ad.jp/v0/.....`）を設定します。\n\n\n\n"
+    },
+    {
+        "id": "43e0331acefd8fdb",
+        "type": "websocket-client",
+        "path": "wss://",
+        "tls": "",
+        "wholemsg": "false",
+        "hb": "0",
+        "subprotocol": ""
+    },
+    {
+        "id": "34242c41.c92474",
+        "type": "ui_tab",
+        "name": "LTE Remote Controler",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "38506e39fd1ff73a",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-dark",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "reset": false
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#097479",
+                    "value": "#097479",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#097479",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#0eb8c0",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#097479",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "LTE remote control system",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "true",
+            "allowTempTheme": "true",
+            "dateFormat": "YYYY/MM/DD",
+            "sizes": {
+                "sx": 100,
+                "sy": 40,
+                "gx": 5,
+                "gy": 5,
+                "cx": 5,
+                "cy": 5,
+                "px": 10,
+                "py": 5
+            }
+        }
+    },
+    {
+        "id": "3d42d7ce18f2b0b0",
+        "type": "ui_group",
+        "name": "CO2濃度",
+        "tab": "34242c41.c92474",
+        "order": 1,
+        "disp": false,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "9fd6cc1e87403a24",
+        "type": "ui_group",
+        "name": "赤外線リモコン",
+        "tab": "34242c41.c92474",
+        "order": 5,
+        "disp": false,
+        "width": "2",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "8505d83f00adf9c4",
+        "type": "ui_group",
+        "name": "温度",
+        "tab": "34242c41.c92474",
+        "order": 2,
+        "disp": false,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "31d6a4287129fb94",
+        "type": "ui_group",
+        "name": "湿度",
+        "tab": "34242c41.c92474",
+        "order": 3,
+        "disp": false,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "76e9f8fa48fc1810",
+        "type": "ui_group",
+        "name": "明るさ",
+        "tab": "34242c41.c92474",
+        "order": 4,
+        "disp": false,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "6aa91ec7.7c76a",
+        "type": "websocket in",
+        "z": "dbab9424.ebe0f8",
+        "name": "monopf_in",
+        "server": "",
+        "client": "43e0331acefd8fdb",
+        "x": 100,
+        "y": 80,
+        "wires": [
+            [
+                "4c824085.9e118",
+                "5d198923.69a608"
+            ]
+        ]
+    },
+    {
+        "id": "4c824085.9e118",
+        "type": "json",
+        "z": "dbab9424.ebe0f8",
+        "name": "String→Object",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 340,
+        "y": 80,
+        "wires": [
+            [
+                "349d8a1396ebc1a6",
+                "497c3af5880cfdc8"
+            ]
+        ]
+    },
+    {
+        "id": "a557a3ec.c13b4",
+        "type": "function",
+        "z": "dbab9424.ebe0f8",
+        "name": "CO2_parse",
+        "func": "msg.payload = msg.payload.payload[0].value; return msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 80,
+        "wires": [
+            [
+                "57c78451.2c0b9c",
+                "8d91e8af.9d0858",
+                "d8ec6c7a.f841d"
+            ]
+        ]
+    },
+    {
+        "id": "8d91e8af.9d0858",
+        "type": "ui_gauge",
+        "z": "dbab9424.ebe0f8",
+        "name": "CO2_gauge",
+        "group": "3d42d7ce18f2b0b0",
+        "order": 1,
+        "width": "1",
+        "height": "4",
+        "gtype": "donut",
+        "title": "CO2濃度",
+        "label": "ppm",
+        "format": "{{value}}",
+        "min": "400",
+        "max": "2000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "800",
+        "seg2": "800",
+        "className": "",
+        "x": 1230,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "7566db0f.ffb034",
+        "type": "comment",
+        "z": "dbab9424.ebe0f8",
+        "name": "ダッシュボード画面でのグラフ表示",
+        "info": "",
+        "x": 160,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "60fdce21.fe051",
+        "type": "ui_button",
+        "z": "dbab9424.ebe0f8",
+        "name": "SW1",
+        "group": "9fd6cc1e87403a24",
+        "order": 0,
+        "width": "1",
+        "height": "1",
+        "passthru": true,
+        "label": "照明OFF",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#b22222",
+        "className": "",
+        "icon": "",
+        "payload": "{\"device_id\":\"31031\",\"type\":\"object\",\"payload\":[{\"type\":\"uint32\",\"tag\":\"11\",\"value\":170}]}",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 110,
+        "y": 640,
+        "wires": [
+            [
+                "d3a687cd.558e78",
+                "e80f109f.d3463"
+            ]
+        ]
+    },
+    {
+        "id": "d3a687cd.558e78",
+        "type": "websocket out",
+        "z": "dbab9424.ebe0f8",
+        "name": "monopf_out",
+        "server": "",
+        "client": "43e0331acefd8fdb",
+        "x": 590,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "798124d1.aa107c",
+        "type": "ui_button",
+        "z": "dbab9424.ebe0f8",
+        "name": "SW6",
+        "group": "9fd6cc1e87403a24",
+        "order": 0,
+        "width": "1",
+        "height": "1",
+        "passthru": true,
+        "label": "照明ON",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "green",
+        "className": "",
+        "icon": "",
+        "payload": "{\"device_id\":\"31031\",\"type\":\"object\",\"payload\":[{\"type\":\"uint32\",\"tag\":\"66\",\"value\":170}]}",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 110,
+        "y": 840,
+        "wires": [
+            [
+                "d3a687cd.558e78",
+                "e80f109f.d3463"
+            ]
+        ]
+    },
+    {
+        "id": "d7fbab5.140a658",
+        "type": "comment",
+        "z": "dbab9424.ebe0f8",
+        "name": "赤外線リモコン操作ボタン",
+        "info": "",
+        "x": 130,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "57c78451.2c0b9c",
+        "type": "debug",
+        "z": "dbab9424.ebe0f8",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "false",
+        "x": 1230,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "5d198923.69a608",
+        "type": "debug",
+        "z": "dbab9424.ebe0f8",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 330,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "349d8a1396ebc1a6",
+        "type": "debug",
+        "z": "dbab9424.ebe0f8",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "497c3af5880cfdc8",
+        "type": "switch",
+        "z": "dbab9424.ebe0f8",
+        "name": "",
+        "property": "payload.device_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "31031",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 570,
+        "y": 80,
+        "wires": [
+            [
+                "a557a3ec.c13b4",
+                "7350370533954790",
+                "b470fba5dc16ccf9",
+                "2609e088a091c1ad"
+            ]
+        ]
+    },
+    {
+        "id": "7350370533954790",
+        "type": "function",
+        "z": "dbab9424.ebe0f8",
+        "name": "TEMP_parse",
+        "func": "msg.payload = msg.payload.payload[1].value; return msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 220,
+        "wires": [
+            [
+                "1fa80f56ef4f6c21"
+            ]
+        ]
+    },
+    {
+        "id": "66095bb31b6cb104",
+        "type": "ui_chart",
+        "z": "dbab9424.ebe0f8",
+        "name": "TEMP_chart",
+        "group": "8505d83f00adf9c4",
+        "order": 2,
+        "width": "7",
+        "height": "4",
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "dd HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "-10",
+        "ymax": "50",
+        "removeOlder": "3",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#f5ca47",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1230,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c6c41d0697142a57",
+        "type": "ui_gauge",
+        "z": "dbab9424.ebe0f8",
+        "name": "TEMP_gauge",
+        "group": "8505d83f00adf9c4",
+        "order": 1,
+        "width": "1",
+        "height": "4",
+        "gtype": "donut",
+        "title": "気温",
+        "label": "℃",
+        "format": "{{value}}",
+        "min": "-20",
+        "max": "60",
+        "colors": [
+            "#0080ff",
+            "#40ea5e",
+            "#ca3838"
+        ],
+        "seg1": "25",
+        "seg2": "",
+        "className": "",
+        "x": 1240,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "cdd0bdcb28f66cb2",
+        "type": "debug",
+        "z": "dbab9424.ebe0f8",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "false",
+        "x": 1230,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "b470fba5dc16ccf9",
+        "type": "function",
+        "z": "dbab9424.ebe0f8",
+        "name": "HUMI_parse",
+        "func": "msg.payload = msg.payload.payload[2].value; return msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 360,
+        "wires": [
+            [
+                "1129cf19305f86e3"
+            ]
+        ]
+    },
+    {
+        "id": "59fa8ef9827c22ba",
+        "type": "ui_chart",
+        "z": "dbab9424.ebe0f8",
+        "name": "HUMI_chart",
+        "group": "31d6a4287129fb94",
+        "order": 2,
+        "width": "7",
+        "height": "4",
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "dd HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "3",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1230,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ae4495b9d60e7693",
+        "type": "ui_gauge",
+        "z": "dbab9424.ebe0f8",
+        "name": "HUMI_gauge",
+        "group": "31d6a4287129fb94",
+        "order": 1,
+        "width": "1",
+        "height": "4",
+        "gtype": "donut",
+        "title": "湿度",
+        "label": "%",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "50",
+        "seg2": "75",
+        "className": "",
+        "x": 1230,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "0136f7ec4d29637a",
+        "type": "debug",
+        "z": "dbab9424.ebe0f8",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "false",
+        "x": 1230,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "2609e088a091c1ad",
+        "type": "function",
+        "z": "dbab9424.ebe0f8",
+        "name": "LUMI_parse",
+        "func": "msg.payload = msg.payload.payload[3].value; return msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 500,
+        "wires": [
+            [
+                "868c9a31a62e8c9e"
+            ]
+        ]
+    },
+    {
+        "id": "9cfe77b248399901",
+        "type": "ui_chart",
+        "z": "dbab9424.ebe0f8",
+        "name": "LUMI_chart",
+        "group": "76e9f8fa48fc1810",
+        "order": 2,
+        "width": "7",
+        "height": "4",
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "dd HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1000",
+        "removeOlder": "3",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ffff80",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#f2f971",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1230,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dc73286cb99ceaa0",
+        "type": "ui_gauge",
+        "z": "dbab9424.ebe0f8",
+        "name": "LUMI_gauge",
+        "group": "76e9f8fa48fc1810",
+        "order": 1,
+        "width": "1",
+        "height": "4",
+        "gtype": "donut",
+        "title": "明るさ",
+        "label": "μW/cm2",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "1000",
+        "colors": [
+            "#c0c0c0",
+            "#13d269",
+            "#ffff00"
+        ],
+        "seg1": "500",
+        "seg2": "",
+        "className": "",
+        "x": 1230,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "e0f13c35334ad082",
+        "type": "debug",
+        "z": "dbab9424.ebe0f8",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "false",
+        "x": 1230,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "1fa80f56ef4f6c21",
+        "type": "change",
+        "z": "dbab9424.ebe0f8",
+        "name": "ROUND",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(msg.payload,1)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 220,
+        "wires": [
+            [
+                "c6c41d0697142a57",
+                "66095bb31b6cb104",
+                "cdd0bdcb28f66cb2"
+            ]
+        ]
+    },
+    {
+        "id": "1129cf19305f86e3",
+        "type": "change",
+        "z": "dbab9424.ebe0f8",
+        "name": "ROUND",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(msg.payload,1)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 360,
+        "wires": [
+            [
+                "ae4495b9d60e7693",
+                "59fa8ef9827c22ba",
+                "0136f7ec4d29637a"
+            ]
+        ]
+    },
+    {
+        "id": "868c9a31a62e8c9e",
+        "type": "change",
+        "z": "dbab9424.ebe0f8",
+        "name": "ROUND",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(msg.payload,1)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 500,
+        "wires": [
+            [
+                "dc73286cb99ceaa0",
+                "9cfe77b248399901",
+                "e0f13c35334ad082"
+            ]
+        ]
+    },
+    {
+        "id": "539f55f79cd3186e",
+        "type": "ui_button",
+        "z": "dbab9424.ebe0f8",
+        "name": "SW3",
+        "group": "9fd6cc1e87403a24",
+        "order": 0,
+        "width": "1",
+        "height": "1",
+        "passthru": true,
+        "label": "エアコンOFF",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#b22222",
+        "className": "",
+        "icon": "",
+        "payload": "{\"device_id\":\"31031\",\"type\":\"object\",\"payload\":[{\"type\":\"uint32\",\"tag\":\"33\",\"value\":170}]}",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 110,
+        "y": 720,
+        "wires": [
+            [
+                "d3a687cd.558e78",
+                "e80f109f.d3463"
+            ]
+        ]
+    },
+    {
+        "id": "ea3a79e2d9f1949f",
+        "type": "ui_button",
+        "z": "dbab9424.ebe0f8",
+        "name": "SW4",
+        "group": "9fd6cc1e87403a24",
+        "order": 0,
+        "width": "1",
+        "height": "1",
+        "passthru": true,
+        "label": "エアコンON",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "green",
+        "className": "",
+        "icon": "",
+        "payload": "{\"device_id\":\"31031\",\"type\":\"object\",\"payload\":[{\"type\":\"uint32\",\"tag\":\"44\",\"value\":170}]}",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 110,
+        "y": 760,
+        "wires": [
+            [
+                "d3a687cd.558e78",
+                "e80f109f.d3463"
+            ]
+        ]
+    },
+    {
+        "id": "bbe778f4812d88ec",
+        "type": "ui_button",
+        "z": "dbab9424.ebe0f8",
+        "name": "SW5",
+        "group": "9fd6cc1e87403a24",
+        "order": 0,
+        "width": "1",
+        "height": "1",
+        "passthru": true,
+        "label": "室温-1℃",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#000080",
+        "className": "",
+        "icon": "",
+        "payload": "{\"device_id\":\"31031\",\"type\":\"object\",\"payload\":[{\"type\":\"uint32\",\"tag\":\"55\",\"value\":170}]}",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 110,
+        "y": 800,
+        "wires": [
+            [
+                "d3a687cd.558e78",
+                "e80f109f.d3463"
+            ]
+        ]
+    },
+    {
+        "id": "aa4df69961fb1ea2",
+        "type": "ui_button",
+        "z": "dbab9424.ebe0f8",
+        "name": "SW2",
+        "group": "9fd6cc1e87403a24",
+        "order": 0,
+        "width": "1",
+        "height": "1",
+        "passthru": true,
+        "label": "室温+1℃",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#ff8c00",
+        "className": "",
+        "icon": "",
+        "payload": "{\"device_id\":\"31031\",\"type\":\"object\",\"payload\":[{\"type\":\"uint32\",\"tag\":\"22\",\"value\":170}]}",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 110,
+        "y": 680,
+        "wires": [
+            [
+                "d3a687cd.558e78",
+                "e80f109f.d3463"
+            ]
+        ]
+    },
+    {
+        "id": "d8ec6c7a.f841d",
+        "type": "ui_chart",
+        "z": "dbab9424.ebe0f8",
+        "name": "CO2_chart",
+        "group": "3d42d7ce18f2b0b0",
+        "order": 3,
+        "width": "7",
+        "height": "4",
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "dd HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "2000",
+        "removeOlder": "3",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#74fb57",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1230,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e80f109f.d3463",
+        "type": "debug",
+        "z": "dbab9424.ebe0f8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 820,
+        "wires": []
+    }
+]

@@ -1,0 +1,10 @@
+DRC Rules Export File for PCB: D:\Dropbox\Development\Project\1602_SAKURA\pcb\SCO-LTEM1RC-A\SCO-LTEM1RC-A.PcbDoc
+RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0
+RuleKind=ShortCircuit|RuleName=ShortCircuit_NoNet|Scope=Board|Allowed=1
+RuleKind=Clearance|RuleName=Clearance_NTH|Scope=Board|Minimum=11.81
+RuleKind=Clearance|RuleName=Clearance_KeepOut|Scope=Board|Minimum=17.72
+RuleKind=Clearance|RuleName=Clearance|Scope=Board|Minimum=5.91
+RuleKind=Width|RuleName=Width|Scope=Board|Minimum=6.00
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=1.97
+RuleKind=MinimumAnnularRing|RuleName=MinimumAnnularRing_0.9mm=<H|Scope=Board|Minimum=5.91
+RuleKind=MinimumAnnularRing|RuleName=MinimumAnnularRing|Scope=Board|Minimum=5.91
