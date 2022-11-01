@@ -1,11 +1,11 @@
-# sipf-std-client_nrf9160
+# monoplatform_nrf9160-ltem1rc
 
 ## Getting start
 
 ### About
+このソフトウェアはさくらのモノプラットフォーム向けのサンプルプログラムです。
+同梱しているPCBファイルで製造した基板上で動作します。(SCO-LTEM1RC-A)
 
-This software is `Standard client firmware' for Sakura's MONOPLATFORM.  
-Target divice are SCO-M5SNRF9160 and SCM-LTEM1NRF.
 
 ### Install nRF Connect SDK
 
@@ -48,12 +48,12 @@ board
 - nrf9160dk_nrf9160_ns
 - thingy91_nrf9160_ns
 
-For develop / SCM-LTEM1NRF and SCO-M5SNRF9160
+For develop / SCM-LTEM1NRF
 ```
 ./build.sh
 ```
 
-For production / SCM-LTEM1NRF and SCO-M5SNRF9160
+For production / SCM-LTEM1NRF
 ```
 ./build.sh production
 ```
