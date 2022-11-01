@@ -17,8 +17,8 @@ Using nRF Connect SDK v1.7.1 .
 ### Clone this repository
 
 ```
-git clone https://github.com/sakura-internet/sipf-std-client_nrf9160.git
-cd sipf-std-client_nrf9160
+git clone https://github.com/sakura-internet/monoplatform_nrf9160-ltem1rc.git
+cd monoplatform_nrf9160-ltem1rc
 ```
 
 ### Clean
@@ -44,9 +44,7 @@ target
 
 board
 
-- scm-ltem1nrf_nrf9160ns (default)
-- nrf9160dk_nrf9160_ns
-- thingy91_nrf9160_ns
+- scm-ltem1nrf_nrf9160ns on SCO-LTEM1RC-A
 
 For develop / SCM-LTEM1NRF
 ```
@@ -56,11 +54,6 @@ For develop / SCM-LTEM1NRF
 For production / SCM-LTEM1NRF
 ```
 ./build.sh production
-```
-
-For production / nRF9160DK
-```
-./build.sh production nrf9160dk_nrf9160_ns
 ```
 
 For local only
